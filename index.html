@@ -3,98 +3,115 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>NANO STUDIO V3.1 | Social Pro</title>
+    <title>NANO STUDIO V6 | Ultimate Edition</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&display=swap');
-        body { 
-            font-family: 'Kanit', sans-serif; 
-            background-color: #050507; 
-            color: #f1f5f9;
-            -webkit-tap-highlight-color: transparent;
-        }
-        .safe-area-bottom { padding-bottom: env(safe-area-inset-bottom); }
-        .glass-card { 
-            background: rgba(255, 255, 255, 0.02); 
-            backdrop-filter: blur(20px); 
-            border: 1px solid rgba(255, 255, 255, 0.08); 
-        }
-        .btn-active:active { transform: scale(0.96); }
-        select { appearance: none; -webkit-appearance: none; color: white !important; background-color: transparent; }
+        body { font-family: 'Kanit', sans-serif; background-color: #020617; color: #f1f5f9; -webkit-tap-highlight-color: transparent; }
+        .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.1); }
+        .btn-active:active { transform: scale(0.94); }
+        select { appearance: none; -webkit-appearance: none; color: #fbbf24 !important; background-color: transparent; font-weight: 600; }
         .fb-gradient { background: linear-gradient(135deg, #1877F2 0%, #0a52b1 100%); }
-        .gen-gradient { background: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%); }
+        .gen-gradient { background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); }
+        .history-card { background: rgba(255,255,255,0.01); border-left: 2px solid #334155; }
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 10px; }
     </style>
 </head>
-<body class="pb-40 min-h-screen">
+<body class="pb-44 min-h-screen">
 
-    <div class="sticky top-0 z-50 bg-black/80 backdrop-blur-xl border-b border-white/10 px-5 py-4 flex justify-between items-center">
+    <div class="sticky top-0 z-50 bg-slate-950/90 backdrop-blur-xl border-b border-white/10 px-5 py-4 flex justify-between items-center">
         <div class="flex items-center gap-3">
-            <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-yellow-500 to-orange-600 flex items-center justify-center border border-white/20 shadow-xl">
-                <i class="fas fa-camera-retro text-xl text-white"></i>
+            <div class="w-10 h-10 rounded-xl bg-amber-500 flex items-center justify-center shadow-lg shadow-amber-500/20">
+                <i class="fas fa-bolt text-slate-900 text-xl"></i>
             </div>
             <div>
-                <h1 class="text-xl font-bold tracking-tight text-white uppercase">Nano Studio <span class="text-yellow-500">V3.1</span></h1>
-                <p class="text-[10px] text-gray-500 uppercase tracking-widest font-light">Pro Content Creator</p>
+                <h1 class="text-lg font-bold tracking-tighter text-white">NANO ULTIMATE <span class="text-amber-500 text-xs ml-1">V6</span></h1>
+                <p class="text-[9px] text-gray-500 uppercase tracking-[0.2em]">Unlimited Imagination</p>
             </div>
         </div>
-        <button onclick="randomizeAll()" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center btn-active border border-white/10">
-            <i class="fas fa-dice text-lg text-yellow-500"></i>
+        <button onclick="randomizeAll()" class="w-12 h-12 rounded-full bg-amber-500/10 flex items-center justify-center btn-active border border-amber-500/20">
+            <i class="fas fa-dice text-2xl text-amber-500"></i>
         </button>
     </div>
 
     <main class="p-5 space-y-6">
 
-        <section class="glass-card p-5 rounded-[2.5rem] space-y-4">
+        <section class="glass p-5 rounded-[2.5rem] space-y-5">
+            <h2 class="text-[10px] font-bold text-gray-500 uppercase tracking-widest flex items-center gap-2">
+                <i class="fas fa-layer-group"></i> พารามิเตอร์การสร้าง
+            </h2>
+            
             <div class="grid grid-cols-1 gap-4">
-                
-                <div class="grid grid-cols-2 gap-3">
-                    <div class="bg-white/5 p-3 rounded-2xl border border-white/5">
-                        <label class="text-[10px] text-gray-500 mb-1 block font-bold tracking-widest uppercase">Character</label>
-                        <select id="char" class="w-full text-xs focus:outline-none">
-                            <option value="none">-- ไม่มี --</option>
+                <div class="bg-slate-900/50 p-4 rounded-2xl border border-white/5">
+                    <label class="text-[9px] text-gray-400 mb-1 block uppercase font-bold">Character (ตัวละคร/ตัวแบบ)</label>
+                    <select id="char" class="w-full text-sm focus:outline-none">
+                        <option value="none">-- ไม่ระบุตัวละคร --</option>
+                        <optgroup label="AI Persona">
                             <option value="Aey, a charming Thai female model">น้องเอ๋ (Aey)</option>
                             <option value="Nueng, a stylish Thai male model">พี่หนึ่ง (Nueng)</option>
-                            <option value="An elderly artisan at work">ช่างฝีมือ</option>
-                            <option value="A Gen-Z digital nomad">นักเดินทาง</option>
-                            <option value="A professional Thai chef">เชฟมือโปร</option>
-                        </select>
-                    </div>
-                    <div class="bg-white/5 p-3 rounded-2xl border border-white/5">
-                        <label class="text-[10px] text-gray-500 mb-1 block font-bold tracking-widest uppercase">Category</label>
-                        <select id="cat" class="w-full text-xs focus:outline-none">
-                            <option value="Landscape">วิวธรรมชาติ</option>
-                            <option value="Commercial Food">อาหาร/เครื่องดื่ม</option>
-                            <option value="Architectural">อาคาร/ตึก</option>
-                            <option value="Macro Nature">มาโคร</option>
-                            <option value="Product Lifestyle">สินค้า</option>
-                            <option value="Aerial Drone">ภาพโดรน</option>
-                            <option value="Interior Design">ภายใน</option>
-                            <option value="Fashion">แฟชั่น</option>
-                            <option value="Automotive">รถยนต์</option>
-                            <option value="Street Life">สตรีท</option>
-                        </select>
-                    </div>
+                        </optgroup>
+                        <optgroup label="Animation Styles">
+                            <option value="a Pixar-style 3D animated character, big expressive eyes, smooth textures">Pixar 3D Animation</option>
+                            <option value="a Studio Ghibli hand-drawn character, nostalgic anime style, Hayao Miyazaki">Studio Ghibli Style</option>
+                            <option value="a Disney-style whimsical 3D character, magical lighting">Disney Animation</option>
+                            <option value="a Makoto Shinkai style anime character, vibrant lighting">Makoto Shinkai Style</option>
+                            <option value="a 90s retro aesthetic anime character, grainy">90s Retro Anime</option>
+                            <option value="a cute Chibi / Kawaii character, big head small body">Chibi / Kawaii</option>
+                        </optgroup>
+                        <optgroup label="Concept Characters">
+                            <option value="a Cyberpunk Cyborg with glowing neon parts">Cyberpunk Cyborg</option>
+                            <option value="a Mythical Thai Guardian (Yaksa) in modern tech-wear">Thai Yaksa Modern</option>
+                            <option value="a Steampunk inventor with brass goggles and gears">Steampunk Inventor</option>
+                            <option value="a futuristic Astronaut on a colorful planet">Futuristic Astronaut</option>
+                            <option value="a High-Fashion Runway Model, avant-garde outfit">Fashion Icon</option>
+                        </optgroup>
+                    </select>
+                </div>
+
+                <div class="bg-slate-900/50 p-4 rounded-2xl border border-white/5">
+                    <label class="text-[9px] text-gray-400 mb-1 block uppercase font-bold">World-Class Style (สไตล์)</label>
+                    <select id="style" class="w-full text-sm focus:outline-none">
+                        <optgroup label="Photography Legends">
+                            <option value="National Geographic photography style, raw, authentic, natural light">National Geographic</option>
+                            <option value="Vogue editorial photography by Annie Leibovitz, dramatic, high-end">Vogue (Annie Leibovitz)</option>
+                            <option value="Peter Lik style, hyper-vibrant landscape photography, high contrast">Peter Lik (Vibrant)</option>
+                            <option value="Wes Anderson style, symmetrical, pastel color palette, whimsical">Wes Anderson Style</option>
+                            <option value="Steve McCurry style, emotional portrait, sharp eyes, cultural depth">Steve McCurry (Portrait)</option>
+                        </optgroup>
+                        <optgroup label="Digital & Art">
+                            <option value="Unreal Engine 5 render, hyper-realistic, 8k, volumetric lighting">Unreal Engine 5 (Hyper-real)</option>
+                            <option value="Cyberpunk 2077 aesthetic, gritty neon, rainy night, high-tech">Cyberpunk 2077</option>
+                            <option value="Studio Ghibli background art, hand-painted, dreamlike nature">Ghibli Art Style</option>
+                            <option value="Oil painting masterpiece, visible brushstrokes, classical museum style">Oil Painting (Museum)</option>
+                            <option value="Pop Art style, Andy Warhol aesthetic, bold colors, dot patterns">Pop Art (Warhol)</option>
+                            <option value="Ukiyo-e Japanese woodblock print style, traditional art">Ukiyo-e Traditional</option>
+                            <option value="Vintage 35mm film, Kodak Portra 400, light leaks, nostalgic">Vintage Film (Kodak)</option>
+                        </optgroup>
+                    </select>
                 </div>
 
                 <div class="grid grid-cols-2 gap-3">
-                    <div class="bg-white/5 p-3 rounded-2xl border border-white/5">
-                        <label class="text-[10px] text-gray-500 mb-1 block font-bold tracking-widest uppercase">Style</label>
-                        <select id="style" class="w-full text-xs focus:outline-none">
-                            <option value="National Geographic, natural lighting">Nat Geo</option>
-                            <option value="Vogue editorial by Annie Leibovitz">Vogue Pro</option>
-                            <option value="Peter Lik style, hyper-vibrant">Fine Art</option>
-                            <option value="Cinematic film, Kodak Portra 400">Cinematic</option>
-                            <option value="Cyberpunk neon, futuristic">Cyberpunk</option>
-                            <option value="Minimalist, soft shadows">Minimalism</option>
+                    <div class="bg-slate-900/50 p-4 rounded-2xl border border-white/5">
+                        <label class="text-[9px] text-gray-400 mb-1 block uppercase font-bold">Category</label>
+                        <select id="cat" class="w-full text-sm focus:outline-none">
+                            <option value="Landscape">ธรรมชาติ</option>
+                            <option value="Food & Drink">อาหาร</option>
+                            <option value="Architecture">ตึก/อาคาร</option>
+                            <option value="Fashion">แฟชั่น</option>
+                            <option value="Macro">มาโคร</option>
+                            <option value="Cyberpunk City">เมืองอนาคต</option>
+                            <option value="Space/Sci-Fi">อวกาศ</option>
+                            <option value="Interior">ภายใน</option>
                         </select>
                     </div>
-                    <div class="bg-white/5 p-3 rounded-2xl border border-white/5">
-                        <label class="text-[10px] text-gray-500 mb-1 block font-bold tracking-widest uppercase">Aspect Ratio</label>
-                        <select id="size" class="w-full text-xs focus:outline-none">
+                    <div class="bg-slate-900/50 p-4 rounded-2xl border border-white/5">
+                        <label class="text-[9px] text-gray-400 mb-1 block uppercase font-bold">Ratio</label>
+                        <select id="size" class="w-full text-sm focus:outline-none">
                             <option value="9:16">9:16 (TikTok)</option>
                             <option value="4:5">4:5 (IG Feed)</option>
-                            <option value="1:1">1:1 (FB/IG Square)</option>
+                            <option value="1:1">1:1 (FB/IG)</option>
                             <option value="16:9">16:9 (Desktop)</option>
                             <option value="2:3">2:3 (Stock)</option>
                         </select>
@@ -103,35 +120,112 @@
             </div>
         </section>
 
-        <section class="space-y-5">
-            <div class="glass-card p-5 rounded-[2rem] border-l-4 border-yellow-500">
-                <div class="flex justify-between items-center mb-3">
-                    <span class="text-xs font-bold text-yellow-500 uppercase">Nano Prompt</span>
-                    <button onclick="copyText('promptText')" class="text-[10px] bg-yellow-500/20 text-yellow-300 px-3 py-1 rounded-full btn-active">Copy</button>
+        <section class="space-y-4">
+            <div class="glass p-6 rounded-[2.5rem] border-l-4 border-amber-500">
+                <div class="flex justify-between items-center mb-4">
+                    <span class="text-xs font-bold text-amber-500 uppercase tracking-widest">Nano Prompt</span>
+                    <button onclick="copyText('promptText')" class="text-[10px] bg-amber-500/20 text-amber-300 px-4 py-1.5 rounded-full btn-active font-bold">COPY</button>
                 </div>
-                <p id="promptText" class="text-sm italic text-gray-300">กดปุ่มสร้างคอนเทนต์เพื่อเริ่ม...</p>
+                <p id="promptText" class="text-sm italic leading-relaxed text-slate-300">กดปุ่มสุ่มหรือสร้างคอนเทนต์เพื่อเริ่มดึงจินตนาการ...</p>
             </div>
 
-            <div class="glass-card p-5 rounded-[2rem] border-l-4 border-blue-500">
-                <div class="flex justify-between items-center mb-3">
-                    <span class="text-xs font-bold text-blue-500 uppercase">Social Post</span>
+            <div class="glass p-6 rounded-[2.5rem] border-l-4 border-blue-500">
+                <div class="flex justify-between items-center mb-4">
+                    <span class="text-xs font-bold text-blue-500 uppercase tracking-widest">Viral Social Content</span>
                 </div>
-                <div class="space-y-3 mb-5">
-                    <p id="capTH" class="text-sm text-white">แคปชั่นภาษาไทย...</p>
-                    <p id="hashtags" class="text-[11px] text-blue-400 font-mono"></p>
-                </div>
-                <button onclick="shareToFB()" class="w-full fb-gradient h-14 rounded-2xl font-bold flex items-center justify-center gap-3 btn-active shadow-xl shadow-blue-500/20">
+                <p id="capTH" class="text-sm text-white mb-4 leading-relaxed">แคปชั่นและแฮชแท็กจะถูกเจนที่นี่...</p>
+                <button onclick="shareToFB()" class="w-full fb-gradient h-14 rounded-2xl font-bold flex items-center justify-center gap-3 btn-active shadow-xl shadow-blue-500/10">
                     <i class="fab fa-facebook text-2xl"></i> SHARE TO FACEBOOK
                 </button>
             </div>
+        </section>
 
-            <div class="glass-card p-5 rounded-[2rem] border-l-4 border-gray-500">
-                <span class="text-xs font-bold text-gray-400 uppercase block mb-2">Stock Metadata</span>
-                <p id="metaText" class="text-xs text-gray-500 italic">Description for stock photography...</p>
-            </div>
+        <section class="space-y-3 pb-10">
+            <h3 class="text-[10px] font-bold text-gray-600 uppercase tracking-[0.3em]">Recent Creations</h3>
+            <div id="historyList" class="space-y-2"></div>
         </section>
 
     </main>
 
-    <div class="fixed bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black via-black/90 to-transparent z-40 safe-area-bottom">
-        <button onclick="generateAll()" class="w-full gen-gradient h-16 rounded-[1.5rem] font-bold text-lg text-white shadow-2xl btn-active flex
+    <div class="fixed bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-slate-950 via-slate-950/90 to-transparent z-40 safe-area-bottom">
+        <button onclick="generateAll()" class="w-full gen-gradient h-16 rounded-[1.5rem] font-bold text-lg text-slate-950 shadow-2xl shadow-amber-500/20 btn-active flex items-center justify-center gap-3">
+            <i class="fas fa-sparkles text-xl"></i> GENERATE MASTERPIECE
+        </button>
+    </div>
+
+    <script>
+        const scenes = [
+            "at a magical hidden cafe in Thailand", "during a surreal sunset over a futuristic city",
+            "surrounded by floating lotus flowers", "in a cozy rain-slicked neon street",
+            "exploring a celestial galaxy garden", "inside a minimalist zen garden studio",
+            "at a colorful traditional Thai festival", "under a giant glowing moon in the jungle"
+        ];
+
+        let history = JSON.parse(localStorage.getItem('nano_v6_history') || '[]');
+        renderHistory();
+
+        function randomizeAll() {
+            const ids = ['char', 'style', 'cat', 'size'];
+            ids.forEach(id => {
+                const el = document.getElementById(id);
+                const options = el.querySelectorAll('option');
+                const validOptions = Array.from(options).filter(opt => opt.value !== '');
+                const randomIdx = Math.floor(Math.random() * validOptions.length);
+                el.value = validOptions[randomIdx].value;
+            });
+            
+            if (window.navigator.vibrate) window.navigator.vibrate([30, 50, 30]);
+            generateAll();
+        }
+
+        function generateAll() {
+            const char = document.getElementById('char').value;
+            const style = document.getElementById('style').value;
+            const cat = document.getElementById('cat').value;
+            const size = document.getElementById('size').value;
+            const scene = scenes[Math.floor(Math.random() * scenes.length)];
+
+            // Multi-Layer Prompt for Nano Banana 2
+            let charPart = char === 'none' ? '' : `featuring ${char},`;
+            const prompt = `${cat} photography ${charPart} ${scene}. Inspired by ${style}. Hyper-detailed, 8k resolution, authentic textures, aspect ratio ${size}.`;
+            
+            // Smart Social Content
+            const cap = `สัมผัสความงามที่เหนือจินตนาการด้วย Nano Banana 2 ✨\nสไตล์: ${style.split(',')[0]}\nแนวภาพ: ${cat}\n\n#NanoBanana2 #AIArt #CreativeStudio #PhotoStock #AIGenerated`;
+
+            document.getElementById('promptText').innerText = prompt;
+            document.getElementById('capTH').innerText = cap;
+
+            // Save to history
+            const entry = { prompt, time: new Date().toLocaleTimeString() };
+            history.unshift(entry);
+            if(history.length > 5) history.pop();
+            localStorage.setItem('nano_v6_history', JSON.stringify(history));
+            renderHistory();
+        }
+
+        function renderHistory() {
+            const container = document.getElementById('historyList');
+            container.innerHTML = history.map(item => `
+                <div class="history-card p-3 rounded-xl text-[10px] text-gray-500 flex justify-between items-center">
+                    <span class="truncate pr-4 italic">${item.prompt}</span>
+                    <span class="whitespace-nowrap font-mono">${item.time}</span>
+                </div>
+            `).join('');
+        }
+
+        function shareToFB() {
+            const text = document.getElementById('capTH').innerText;
+            navigator.clipboard.writeText(text).then(() => {
+                alert('คัดลอกแคปชั่นแล้ว! เตรียมวางโพสต์ใน Facebook นะคะ');
+                window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`, '_blank');
+            });
+        }
+
+        function copyText(id) {
+            const text = document.getElementById(id).innerText;
+            navigator.clipboard.writeText(text);
+            alert('คัดลอกลง Clipboard แล้วค่ะ!');
+        }
+    </script>
+</body>
+</html>
