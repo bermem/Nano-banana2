@@ -3,128 +3,135 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>NANO STUDIO V5 | History & Share</title>
+    <title>NANO STUDIO V3.1 | Social Pro</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&display=swap');
-        body { font-family: 'Kanit', sans-serif; background-color: #0a0a0c; color: #e2e8f0; -webkit-tap-highlight-color: transparent; }
-        .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.1); }
+        body { 
+            font-family: 'Kanit', sans-serif; 
+            background-color: #050507; 
+            color: #f1f5f9;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .safe-area-bottom { padding-bottom: env(safe-area-inset-bottom); }
+        .glass-card { 
+            background: rgba(255, 255, 255, 0.02); 
+            backdrop-filter: blur(20px); 
+            border: 1px solid rgba(255, 255, 255, 0.08); 
+        }
         .btn-active:active { transform: scale(0.96); }
-        .history-item { border-left: 3px solid #f59e0b; background: rgba(255,255,255,0.02); transition: 0.3s; }
-        .history-item:hover { background: rgba(255,255,255,0.05); }
-        select { appearance: none; color: white !important; }
+        select { appearance: none; -webkit-appearance: none; color: white !important; background-color: transparent; }
+        .fb-gradient { background: linear-gradient(135deg, #1877F2 0%, #0a52b1 100%); }
+        .gen-gradient { background: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%); }
     </style>
 </head>
-<body class="pb-40">
+<body class="pb-40 min-h-screen">
 
-    <div class="sticky top-0 z-50 bg-black/90 backdrop-blur-xl border-b border-white/10 px-5 py-4 flex justify-between items-center">
+    <div class="sticky top-0 z-50 bg-black/80 backdrop-blur-xl border-b border-white/10 px-5 py-4 flex justify-between items-center">
         <div class="flex items-center gap-3">
-            <div class="w-10 h-10 rounded-2xl bg-gradient-to-br from-blue-600 to-purple-600 flex items-center justify-center shadow-lg">
-                <i class="fas fa-history text-white"></i>
+            <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-yellow-500 to-orange-600 flex items-center justify-center border border-white/20 shadow-xl">
+                <i class="fas fa-camera-retro text-xl text-white"></i>
             </div>
-            <h1 class="text-xl font-bold tracking-tighter uppercase text-white">Nano <span class="text-blue-500">History</span></h1>
+            <div>
+                <h1 class="text-xl font-bold tracking-tight text-white uppercase">Nano Studio <span class="text-yellow-500">V3.1</span></h1>
+                <p class="text-[10px] text-gray-500 uppercase tracking-widest font-light">Pro Content Creator</p>
+            </div>
         </div>
-        <button onclick="clearHistory()" class="text-xs text-gray-500 hover:text-red-400 transition">ล้างประวัติ</button>
-    </div>
-
-    <main class="p-5 space-y-6">
-        <section class="glass p-5 rounded-[2rem] space-y-4">
-            <div class="grid grid-cols-1 gap-3">
-                <select id="char" class="w-full bg-white/5 p-4 rounded-2xl text-sm outline-none border border-white/10">
-                    <option value="Aey, a charming Thai female model">ตัวแบบ: น้องเอ๋ (Aey)</option>
-                    <option value="Nueng, a stylish Thai male model">ตัวแบบ: พี่หนึ่ง (Nueng)</option>
-                    <option value="Professional artisan in Thailand">ตัวแบบ: ช่างฝีมือ / เชฟ</option>
-                    <option value="none">-- ไม่มีตัวละคร --</option>
-                </select>
-                <select id="style" class="w-full bg-white/5 p-4 rounded-2xl text-sm outline-none border border-white/10">
-                    <option value="National Geographic style, natural lighting">สไตล์: Nat Geo</option>
-                    <option value="Vogue Magazine editorial style">สไตล์: Vogue Editorial</option>
-                    <option value="Cinematic movie scene, 35mm film">สไตล์: Cinematic Masterpiece</option>
-                    <option value="Cyberpunk neon lighting, futuristic">สไตล์: Cyberpunk</option>
-                </select>
-            </div>
-        </section>
-
-        <section id="output" class="hidden space-y-4">
-            <div class="glass p-5 rounded-[2rem] border-l-4 border-blue-500">
-                <div class="flex justify-between items-center mb-2">
-                    <span class="text-[10px] font-bold text-blue-400 uppercase tracking-widest">Latest Prompt</span>
-                    <button onclick="copyText('currentPrompt')" class="text-[10px] bg-blue-500/20 text-blue-300 px-3 py-1 rounded-full">Copy</button>
-                </div>
-                <p id="currentPrompt" class="text-sm italic text-blue-100"></p>
-            </div>
-
-            <div class="glass p-5 rounded-[2rem] border-l-4 border-purple-500">
-                <div class="flex justify-between items-center mb-3">
-                    <span class="text-[10px] font-bold text-purple-400 uppercase tracking-widest">Share to Social</span>
-                </div>
-                <p id="currentCaption" class="text-sm text-gray-200 mb-3"></p>
-                <div class="flex gap-2">
-                    <button onclick="shareToFB()" class="flex-1 bg-[#1877F2] h-12 rounded-xl font-bold flex items-center justify-center gap-2 btn-active">
-                        <i class="fab fa-facebook text-xl"></i> Share on FB
-                    </button>
-                    <button onclick="copyText('currentCaption')" class="w-12 bg-white/10 h-12 rounded-xl flex items-center justify-center btn-active">
-                        <i class="fas fa-copy"></i>
-                    </button>
-                </div>
-            </div>
-        </section>
-
-        <section class="space-y-4">
-            <h2 class="text-sm font-bold text-gray-500 uppercase tracking-widest flex items-center gap-2">
-                <i class="fas fa-clock"></i> ประวัติการสร้าง (History)
-            </h2>
-            <div id="historyList" class="space-y-3">
-                </div>
-        </section>
-    </main>
-
-    <div class="fixed bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black via-black/90 z-50">
-        <button onclick="generateAndSave()" class="w-full bg-gradient-to-r from-blue-600 to-purple-600 h-16 rounded-2xl font-bold text-lg shadow-2xl btn-active">
-            GENERATE & SAVE
+        <button onclick="randomizeAll()" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center btn-active border border-white/10">
+            <i class="fas fa-dice text-lg text-yellow-500"></i>
         </button>
     </div>
 
-    <script>
-        // Load history on startup
-        let historyData = JSON.parse(localStorage.getItem('nano_history') || '[]');
-        renderHistory();
+    <main class="p-5 space-y-6">
 
-        function generateAndSave() {
-            const char = document.getElementById('char').value;
-            const style = document.getElementById('style').value;
-            const prompt = `A professional shot of ${char}, ${style}, 8k resolution, masterpiece.`;
-            const caption = `เนรมิตภาพสวยระดับโลกด้วย Nano Banana 2 ✨ สไตล์ ${style.split(',')[0]} #NanoBanana2 #AIArt #Creative`;
+        <section class="glass-card p-5 rounded-[2.5rem] space-y-4">
+            <div class="grid grid-cols-1 gap-4">
+                
+                <div class="grid grid-cols-2 gap-3">
+                    <div class="bg-white/5 p-3 rounded-2xl border border-white/5">
+                        <label class="text-[10px] text-gray-500 mb-1 block font-bold tracking-widest uppercase">Character</label>
+                        <select id="char" class="w-full text-xs focus:outline-none">
+                            <option value="none">-- ไม่มี --</option>
+                            <option value="Aey, a charming Thai female model">น้องเอ๋ (Aey)</option>
+                            <option value="Nueng, a stylish Thai male model">พี่หนึ่ง (Nueng)</option>
+                            <option value="An elderly artisan at work">ช่างฝีมือ</option>
+                            <option value="A Gen-Z digital nomad">นักเดินทาง</option>
+                            <option value="A professional Thai chef">เชฟมือโปร</option>
+                        </select>
+                    </div>
+                    <div class="bg-white/5 p-3 rounded-2xl border border-white/5">
+                        <label class="text-[10px] text-gray-500 mb-1 block font-bold tracking-widest uppercase">Category</label>
+                        <select id="cat" class="w-full text-xs focus:outline-none">
+                            <option value="Landscape">วิวธรรมชาติ</option>
+                            <option value="Commercial Food">อาหาร/เครื่องดื่ม</option>
+                            <option value="Architectural">อาคาร/ตึก</option>
+                            <option value="Macro Nature">มาโคร</option>
+                            <option value="Product Lifestyle">สินค้า</option>
+                            <option value="Aerial Drone">ภาพโดรน</option>
+                            <option value="Interior Design">ภายใน</option>
+                            <option value="Fashion">แฟชั่น</option>
+                            <option value="Automotive">รถยนต์</option>
+                            <option value="Street Life">สตรีท</option>
+                        </select>
+                    </div>
+                </div>
 
-            // Update Current UI
-            document.getElementById('output').classList.remove('hidden');
-            document.getElementById('currentPrompt').innerText = prompt;
-            document.getElementById('currentCaption').innerText = caption;
+                <div class="grid grid-cols-2 gap-3">
+                    <div class="bg-white/5 p-3 rounded-2xl border border-white/5">
+                        <label class="text-[10px] text-gray-500 mb-1 block font-bold tracking-widest uppercase">Style</label>
+                        <select id="style" class="w-full text-xs focus:outline-none">
+                            <option value="National Geographic, natural lighting">Nat Geo</option>
+                            <option value="Vogue editorial by Annie Leibovitz">Vogue Pro</option>
+                            <option value="Peter Lik style, hyper-vibrant">Fine Art</option>
+                            <option value="Cinematic film, Kodak Portra 400">Cinematic</option>
+                            <option value="Cyberpunk neon, futuristic">Cyberpunk</option>
+                            <option value="Minimalist, soft shadows">Minimalism</option>
+                        </select>
+                    </div>
+                    <div class="bg-white/5 p-3 rounded-2xl border border-white/5">
+                        <label class="text-[10px] text-gray-500 mb-1 block font-bold tracking-widest uppercase">Aspect Ratio</label>
+                        <select id="size" class="w-full text-xs focus:outline-none">
+                            <option value="9:16">9:16 (TikTok)</option>
+                            <option value="4:5">4:5 (IG Feed)</option>
+                            <option value="1:1">1:1 (FB/IG Square)</option>
+                            <option value="16:9">16:9 (Desktop)</option>
+                            <option value="2:3">2:3 (Stock)</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-            // Save to History
-            const newEntry = {
-                id: Date.now(),
-                prompt: prompt,
-                caption: caption,
-                time: new Date().toLocaleTimeString()
-            };
-            historyData.unshift(newEntry);
-            if(historyData.length > 10) historyData.pop(); // Keep last 10
-            localStorage.setItem('nano_history', JSON.stringify(historyData));
-            
-            renderHistory();
-            if (window.navigator.vibrate) window.navigator.vibrate(50);
-        }
+        <section class="space-y-5">
+            <div class="glass-card p-5 rounded-[2rem] border-l-4 border-yellow-500">
+                <div class="flex justify-between items-center mb-3">
+                    <span class="text-xs font-bold text-yellow-500 uppercase">Nano Prompt</span>
+                    <button onclick="copyText('promptText')" class="text-[10px] bg-yellow-500/20 text-yellow-300 px-3 py-1 rounded-full btn-active">Copy</button>
+                </div>
+                <p id="promptText" class="text-sm italic text-gray-300">กดปุ่มสร้างคอนเทนต์เพื่อเริ่ม...</p>
+            </div>
 
-        function renderHistory() {
-            const list = document.getElementById('historyList');
-            if(historyData.length === 0) {
-                list.innerHTML = '<p class="text-xs text-gray-600 text-center py-10 italic">ยังไม่มีประวัติการสร้าง</p>';
-                return;
-            }
-            list.innerHTML = historyData.map(item => `
-                <div class="history-item p-4 rounded-xl space-y-2">
-                    <div class="flex justify-between items-center">
-                        <span class="text-[10px] text-gray-500">${item.time}</span>
-                        <button onclick="copyTextById('${item.id}')" class="text-[10px] text-blue-400">คัดลอก</
+            <div class="glass-card p-5 rounded-[2rem] border-l-4 border-blue-500">
+                <div class="flex justify-between items-center mb-3">
+                    <span class="text-xs font-bold text-blue-500 uppercase">Social Post</span>
+                </div>
+                <div class="space-y-3 mb-5">
+                    <p id="capTH" class="text-sm text-white">แคปชั่นภาษาไทย...</p>
+                    <p id="hashtags" class="text-[11px] text-blue-400 font-mono"></p>
+                </div>
+                <button onclick="shareToFB()" class="w-full fb-gradient h-14 rounded-2xl font-bold flex items-center justify-center gap-3 btn-active shadow-xl shadow-blue-500/20">
+                    <i class="fab fa-facebook text-2xl"></i> SHARE TO FACEBOOK
+                </button>
+            </div>
+
+            <div class="glass-card p-5 rounded-[2rem] border-l-4 border-gray-500">
+                <span class="text-xs font-bold text-gray-400 uppercase block mb-2">Stock Metadata</span>
+                <p id="metaText" class="text-xs text-gray-500 italic">Description for stock photography...</p>
+            </div>
+        </section>
+
+    </main>
+
+    <div class="fixed bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black via-black/90 to-transparent z-40 safe-area-bottom">
+        <button onclick="generateAll()" class="w-full gen-gradient h-16 rounded-[1.5rem] font-bold text-lg text-white shadow-2xl btn-active flex
